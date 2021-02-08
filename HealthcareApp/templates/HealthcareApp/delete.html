@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>delete</title>
+</head>
+<body>
+are you want to delete this
+<br/>
+<hr/>
+<form method="POST" action="{% url 'delete_item' items.id %}">
+    {% csrf_token %}
+    <input type="submit" name="confirm" class="btn btn-danger">
+</form>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body{
+            overflow-x:hidden;
+            overflow-y:hidden;
+        }
+        .bottomright {
+          position: absolute;
+          bottom: 159px;
+          right: 140px;
+          font-size: 18px;
+        }
+        .col-10{
+            padding-right:110px;
+            padding-top:70px;
+            padding-left:90px;
+            background-color:#FAFAD2;
+
+        }
+        .card{
+            box-shadow: 5px 5px 3px grey;
+
+        }
+        .card-body{
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+        a{
+            color:white;
+
+        }
+        a:hover {
+  color: white;
+}
+    </style>
+</head>
+<body>
+{% if request.user.is_authenticated %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Health is wealth</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+
+      </li>
+        <li class="nav-item active">
+              </li>
+    </ul>
+    <form method="get" action="/result" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div class="row">
+    <div class="col-2" >
+      <div class="alert alert-dark" role="alert" style="height:600px;background-color:black;" >
+          <a href="{% url 'home' %}" >Home</a><hr/>
+          <a href="{% url 'data' %}" >database</a><hr/>
+          <a href="{% url 'logout' %}">logout</a>
+</div>
+    </div>
+    <div class="col-10">
+    <div class="row py-2">
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <center><h4>body temperature</h4></center>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <center><h4>blood pressure</h4></center>
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        </div>
+         <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <center><h4>Glucose</h4></center>
+                    <canvas id="myChart3"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row py-2">
+         <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <center><h4>Heart rate</h4></center>
+                    <canvas id="myChart4"></canvas>
+                </div>
+            </div>
+        </div>
+         <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <center><h4>oxygen saturation</h4></center>
+                    <canvas id="myChart5"></canvas>
+                </div>
+            </div>
+
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
+
+        // The data for our dataset
+        data: {
+            labels: ['normal', 'critical'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: ['red','green'],
+                borderColor: ['red','green'],
+                data: [50, 20]
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            cutoutPercentage:90
+        }
+    });
+    //////////////////////////////////////////////////////
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
+
+        // The data for our dataset
+        data: {
+            labels: ['normal', 'critical'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: ['red','green'],
+                borderColor: ['red','green'],
+                data: [10, 3]
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            cutoutPercentage:90
+        }
+    });
+    ///////////////////////////////////////
+    var ctx = document.getElementById('myChart3').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
+
+        // The data for our dataset
+        data: {
+            labels: ['normal', 'critical'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: ['red','green'],
+                borderColor: ['red','green'],
+                data: [15,7]
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            cutoutPercentage:90
+        }
+    });
+    //////////////////////////////
+        var ctx = document.getElementById('myChart4').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
+
+        // The data for our dataset
+        data: {
+            labels: ['normal', 'critical'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: ['red','green'],
+                borderColor: ['red','green'],
+                data: [10,2]
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            cutoutPercentage:90
+        }
+    });
+    ///////////////////////////////////////////
+    var ctx = document.getElementById('myChart5').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
+
+        // The data for our dataset
+        data: {
+            labels: ['normal', 'critical'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: ['red','green'],
+                borderColor: ['red','green'],
+                data: [10,2]
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            cutoutPercentage:90
+        }
+    });
+
+</script>
+
+{% else  %}
+<a href="{% url 'register'%}">register</a>
+<a href="{% url 'login' %}">login</a>
+{% endif %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
